@@ -1,0 +1,22 @@
+server:
+  port: 9001
+  
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:      defaultZone: http://localhost:8761/eureka/
+  instance:    hostname: localhost 
+    
+spring:  security:    user:      name: admin
+      password: DPj~/7Lb!NCmE6v#  application:    name: RMS-SERVICE
+    
+    
+logging:  file:    name: rms.log
+    max-size: 5MB    total-size-cap: 50MB      
+  pattern:    rolling-file-name: rms-%d{yyyy-MM-dd}.%i.log
+
+
+ 
+
+        
