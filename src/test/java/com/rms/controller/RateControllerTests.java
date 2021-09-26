@@ -1,7 +1,6 @@
 package com.rms.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,7 +25,6 @@ import com.rms.permission.RatePermission;
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(RateController.class)
-//@SpringBootTest
 class RateControllerTests {
     
 	@MockBean

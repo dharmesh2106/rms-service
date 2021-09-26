@@ -9,14 +9,11 @@ eureka:
   instance:    hostname: localhost 
     
 spring:  security:    user:      name: admin
-      password: DPj~/7Lb!NCmE6v#  application:    name: RMS-SERVICE
-    
+      password: DPj~/7Lb!NCmE6v#  application:    name: RMS-SERVICE  jpa:    hibernate:      ddl-auto: create
+  datasource:    url:  jdbc:mysql://localhost:3306/rms
+    username: root
+    password: root
     
 logging:  file:    name: rms.log
     max-size: 5MB    total-size-cap: 50MB      
-  pattern:    rolling-file-name: rms-%d{yyyy-MM-dd}.%i.log
-
-
- 
-
-        
+  pattern:    rolling-file-name: rms-%d{yyyy-MM-dd}.%i.log       

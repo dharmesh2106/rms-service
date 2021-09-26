@@ -14,12 +14,15 @@ public class WebSecurityConfig
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	/**
+    	 * Remove this code on production server
+    	 */
         http.csrf().disable();
     }
 
-    protected void registerAuthentication(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
-        authManagerBuilder
-            .inMemoryAuthentication()
-                .withUser("admin").password("DPj~/7Lb!NCmE6v#").roles("ADMIN");
-    }
+//    protected void registerAuthentication(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
+//        authManagerBuilder
+//            .inMemoryAuthentication()
+//                .withUser("admin").password("DPj~/7Lb!NCmE6v#").roles("ADMIN");
+//    }
 }
