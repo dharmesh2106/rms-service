@@ -27,7 +27,7 @@ public abstract class RmsPermissionImpl {
 		if (rate.getAmount()  == null) {
 			errors.add(String.format(CommonValues.FIELD_REQUIRED, CommonValues.RATE_AMOUNT));
 		}
-		if (rate.getRateEffectiveDate().after(rate.getRateExpirationDate())  == true) {
+		if (rate.getRateEffectiveDate() != null && rate.getRateExpirationDate() != null && rate.getRateEffectiveDate().after(rate.getRateExpirationDate())  == true) {
 			errors.add(CommonValues.EFFECTIVE_DATE_SHOULD_BEFOR_EXPIREDATE);
 		}
 		logger.info("Validating rate {} completed.", rate.getRateId());

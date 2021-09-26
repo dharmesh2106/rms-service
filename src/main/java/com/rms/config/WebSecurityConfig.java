@@ -1,11 +1,15 @@
 package com.rms.config;
 
+import java.time.Duration;
+
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableWebSecurity
@@ -19,10 +23,12 @@ public class WebSecurityConfig
     	 */
         http.csrf().disable();
     }
+    
+    @Bean
+	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 
-//    protected void registerAuthentication(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
-//        authManagerBuilder
-//            .inMemoryAuthentication()
-//                .withUser("admin").password("DPj~/7Lb!NCmE6v#").roles("ADMIN");
-//    }
+		return builder.setConnectTimeout(Duration.ofMillis(5000)).setReadTimeout(Duration.ofMillis(5000)).build();
+	}
+
+
 }
