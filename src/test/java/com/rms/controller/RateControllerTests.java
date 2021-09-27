@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.net.URI;
 import java.util.Calendar;
 
 import org.hamcrest.Matchers;
@@ -18,8 +19,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rms.model.Surcharge;
 import com.rms.model.Rate;
 import com.rms.permission.RatePermission;
 
@@ -27,9 +30,14 @@ import com.rms.permission.RatePermission;
 @WebMvcTest(RateController.class)
 class RateControllerTests {
     
+	private static final String URI_SURCHARGE = "https://surcharge.free.beeceptor.com/surcharge";
+	
 	@MockBean
     RatePermission ratePermission;
-    
+	
+	@MockBean
+	private RestTemplate restTemplate;
+	
 	@Autowired
     private MockMvc mockMvc;
 
@@ -43,7 +51,7 @@ class RateControllerTests {
 		calendar.add(Calendar.MONTH, 1);
 		rate.setRateExpirationDate(calendar.getTime());
 		rate.setAmount(10);
-		
+		Mockito.when(restTemplate.getForObject(URI_SURCHARGE,Surcharge.class)).thenReturn(new Surcharge(200L,50L));
 		Mockito.when(ratePermission.findById(1L)).thenReturn(rate);
 		
 		mockMvc.perform(get("/rms/v1/rates/{rateId}",1))
@@ -61,6 +69,7 @@ class RateControllerTests {
 		calendar.add(Calendar.MONTH, 1);
 		rate.setRateExpirationDate(calendar.getTime());
 		rate.setAmount(10);
+		Mockito.when(restTemplate.getForObject(URI_SURCHARGE,Surcharge.class)).thenReturn(new Surcharge(200L,50L));
 		Mockito.when(ratePermission.createRate(rate)).thenReturn(rate);
 		
 		mockMvc.perform( MockMvcRequestBuilders
@@ -82,6 +91,7 @@ class RateControllerTests {
 		calendar.add(Calendar.MONTH, 1);
 		rate.setRateExpirationDate(calendar.getTime());
 		rate.setAmount(10);
+		Mockito.when(restTemplate.getForObject(URI_SURCHARGE,Surcharge.class)).thenReturn(new Surcharge(200L,50L));
 		Mockito.when(ratePermission.updateRate(rate)).thenReturn(rate);
 		
 		mockMvc.perform( MockMvcRequestBuilders
